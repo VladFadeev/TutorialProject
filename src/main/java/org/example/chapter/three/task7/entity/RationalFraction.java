@@ -1,16 +1,24 @@
 package org.example.chapter.three.task7.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.Objects;
 
 public class RationalFraction implements Cloneable {
+    private final static Logger LOGGER = LogManager.getLogger();
     private int numerator;
     private int denominator;
 
-    public RationalFraction(int numerator, int denominator) throws IllegalArgumentException{
+    public RationalFraction(@JsonProperty("numerator") int numerator,
+                            @JsonProperty("denominator") int denominator) throws IllegalArgumentException{
         if (denominator == 0) {
+            LOGGER.error("denominator is zero");
             throw  new IllegalArgumentException("denominator is zero");
         }
         if (denominator < 0) {
+            LOGGER.warn("denominator is negative");
             numerator = -numerator;
             denominator = -denominator;
         }
@@ -33,8 +41,9 @@ public class RationalFraction implements Cloneable {
     }
 
     public RationalFraction subtract(RationalFraction other) {
-        other.numerator = -other.numerator;
-        return this.add(other);
+        numerator = numerator * other.denominator - other.numerator * denominator;
+        denominator = denominator * other.denominator;
+        return this.reduce();
     }
 
     public RationalFraction multiply(RationalFraction other) {
@@ -43,6 +52,11 @@ public class RationalFraction implements Cloneable {
         return this.reduce();
     }
 
+    /***
+     * Reduces numerator and denominator by their Greatest Common Divider
+     *
+     * @return reduced object
+     */
     private RationalFraction reduce() {
         int gcd = gcd(numerator, denominator);
         numerator /= gcd;
@@ -72,8 +86,8 @@ public class RationalFraction implements Cloneable {
     @Override
     public String toString() {
         return "{" +
-                numerator + "/" + denominator +
-                '}';
+                numerator + (denominator != 1 ? "/" + denominator : "") +
+                "}";
     }
 
     @Override

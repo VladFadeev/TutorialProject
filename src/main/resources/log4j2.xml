@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" xmlns="https://logging.apache.org/xml/ns"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="https://logging.apache.org/xml/ns https://logging.apache.org/xml/ns/log4j-config-2.xsd">
+
+    <Properties>
+        <Property name="base_path" value="C:\Users\vlad2\Documents\Some Documents\TutorialProject\log"/>
+        <Property name="FILE_APPENDER" value="FILE"/>
+    </Properties>
+    <Appenders>
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{dd-MM-yyyy hh:mm:ss:SSS} [%t] %5p - %m%n"/>
+        </Console>
+
+        <RollingFile name="${FILE_APPENDER}" fileName="${base_path}/main.log" filePattern="${base_path}/main_%i.log" append="true">
+            <PatternLayout pattern="%d{dd-MM-yyyy hh:mm:ss:SSS} [%t] %5p - %m%n"/>
+            <DefaultRolloverStrategy max="3"/>
+            <Policies>
+                <CronTriggeringPolicy schedule="0 * * * * ?"/>
+                <SizeBasedTriggeringPolicy size="10kB"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="org.example.Main" level="DEBUG" additivity = "false">
+            <AppenderRef ref="${FILE_APPENDER}" level="DEBUG"/>
+        </Logger>
+
+        <Logger name="org.example.chapter.three.task7.service.PointService" level="DEBUG" additivity = "false">
+            <AppenderRef ref="CONSOLE" level="DEBUG"/>
+            <!--
+            <AppenderRef ref="${FILE_APPENDER}" level="WARN"/>
+            !-->
+        </Logger>
+    </Loggers>
+
+
+</Configuration>

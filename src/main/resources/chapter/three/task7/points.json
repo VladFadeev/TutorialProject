@@ -1,0 +1,44 @@
+[
+  {
+    "x": {
+      "numerator": 1,
+      "denominator": 1
+    },
+    "y": {
+      "numerator": 1,
+      "denominator": 1
+    },
+    "z": {
+      "numerator": 1,
+      "denominator": 1
+    }
+  },
+  {
+    "x": {
+      "numerator": 2,
+      "denominator": 1
+    },
+    "y": {
+      "numerator": 3,
+      "denominator": 1
+    },
+    "z": {
+      "numerator": 4,
+      "denominator": 1
+    }
+  },
+  {
+    "x": {
+      "numerator": 10001,
+      "denominator": 1
+    },
+    "y": {
+      "numerator": 20001,
+      "denominator": 1
+    },
+    "z": {
+      "numerator": 30001,
+      "denominator": 1
+    }
+  }
+]

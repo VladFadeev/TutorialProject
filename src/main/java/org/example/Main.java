@@ -4,13 +4,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.chapter.five.task17.entity.Cinema;
 import org.example.chapter.five.task17.service.CinemaCreator;
-import org.example.chapter.four.task12.entity.BusinessTariff;
-import org.example.chapter.four.task12.entity.ChildTariff;
-import org.example.chapter.four.task12.entity.RegularTariff;
 import org.example.chapter.four.task12.entity.Tariff;
+import org.example.chapter.four.task12.service.TariffCreator;
 import org.example.chapter.four.task12.service.TariffService;
 import org.example.chapter.three.task7.entity.Point;
-import org.example.chapter.three.task7.entity.RationalFraction;
 import org.example.chapter.three.task7.service.PointCreator;
 import org.example.chapter.three.task7.service.PointService;
 import org.example.util.create.Creator;
@@ -20,6 +17,7 @@ import org.example.util.print.impl.CLIPrinter;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.regex.Pattern;
 
 
@@ -34,7 +32,7 @@ public class Main {
         printer = applyApplicationParams(args);
         printer.printHelloSection();
         chapter3Task7();
-        //chapter4Task12();
+        chapter4Task12();
         //chapter5Task17();
         printer.printEndSection();
         LOGGER.info("Application ended");
@@ -72,20 +70,22 @@ public class Main {
         LOGGER.info("Chapter 4 Task 12 Started");
         printer.printLineSeparator();
         printer.printCenter("Chapter 4, Task 12");
-        TariffService tariffService = new TariffService();
-        tariffService.addTariff(new RegularTariff(13, RegularTariff.class.getSimpleName(), 130, 13, 23));
-        tariffService.addTariff(new RegularTariff(10, RegularTariff.class.getSimpleName(), 100, 10, 41));
-        tariffService.addTariff(new RegularTariff(15, RegularTariff.class.getSimpleName(), 150, 15, 6));
-        tariffService.addTariff(new RegularTariff(20, RegularTariff.class.getSimpleName(), 200, 20, 100));
-        tariffService.addTariff(new RegularTariff(24, RegularTariff.class.getSimpleName(), 240, 24, 35));
-        tariffService.addTariff(new ChildTariff(7, ChildTariff.class.getSimpleName(), 100, 15));
-        tariffService.addTariff(new BusinessTariff(40, BusinessTariff.class.getSimpleName(), 20));
-
-        List<Tariff> sorted = tariffService.sortByPrice();
+        Creator<Tariff> tariffCreator =
+                new TariffCreator("src/main/resources/chapter/four/task12/tariffs.json");
+        List<Tariff> tariffs;
+        try {
+            tariffs = tariffCreator.createList();
+        } catch (CreatorException e) {
+            LOGGER.error(e);
+            throw new RuntimeException(e);
+        }
+        List<Tariff> sorted = TariffService.sortByPrice(tariffs);
         printer.print("Tariffs sorted by price: " + sorted);
-
-        List<Tariff> filtered = tariffService.getTariffByParams(20, 60, 15, 25, -1, 1000, -1, 200);
-        printer.print("Tariffs filtered by params: " + filtered);
+        Optional<Tariff> tariff = TariffService.getTariffByParams(tariffs, new int[] {15, 25}, new int[] {-1, 200},  new int[] {-1, 15});
+        printer.print("");
+        printer.print("Customers across all tariffs: " + TariffService.getCustomersSum(tariffs));
+        printer.print("");
+        printer.print("Tariffs filtered by params: " + (tariff.isPresent() ? tariff.get() : "none"));
         LOGGER.info("Chapter 4 Task 12 Ended");
     }
 

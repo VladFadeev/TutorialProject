@@ -1,37 +1,37 @@
 {
-  "name": "Kiev",
+  "description": "Kiev",
   "address": "Kievskiy skver 1",
   "screenTypes" : ["Standard", "Standard", "Standard 3D", "VIP 3D", "VIP", "Standard 3D"],
   "screenSpecs" : ["Large, Dolby Digital", "Medium, Dolby Digital", "Large, Dolby Digital, 3D",
     "Small, Dolby Digital, 3D, IMAX", "Small, Dolby Digital, IMAX", "Medium, Dolby Digital, 3D"],
   "films": [
     {
-      "name": "F_Joker",
+      "description": "F_Joker",
       "watchTimeMinutes": 120,
       "sessions": 10
     },
     {
-      "name": "A_Transformers",
+      "description": "A_Transformers",
       "watchTimeMinutes": 93,
       "sessions": 8
     },
     {
-      "name": "C_It",
+      "description": "C_It",
       "watchTimeMinutes": 135,
       "sessions": 4
     },
     {
-      "name": "D_Hunger Games",
+      "description": "D_Hunger Games",
       "watchTimeMinutes": 106,
       "sessions": 9
     },
     {
-      "name": "E_Harry Potter and Philosopher Stone",
+      "description": "E_Harry Potter and Philosopher Stone",
       "watchTimeMinutes": 147,
       "sessions": 15
     },
     {
-      "name": "B_Look Back",
+      "description": "B_Look Back",
       "watchTimeMinutes": 53,
       "sessions": 7
     }

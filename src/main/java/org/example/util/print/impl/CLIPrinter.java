@@ -2,6 +2,8 @@ package org.example.util.print.impl;
 
 import org.example.util.print.Printer;
 
+import java.util.List;
+
 public class CLIPrinter implements Printer {
     private static volatile CLIPrinter instance;
     private static volatile FormattingService fs;
@@ -16,6 +18,18 @@ public class CLIPrinter implements Printer {
     }
 
     @Override
+    public void print(List<String> lines) {
+        lines.forEach(this::print);
+    }
+
+    @Override
+    public void printHeader(String header) {
+        print("");
+        printCenter(header);
+        print("");
+    }
+
+    @Override
     public void printLineSeparator() {
         System.out.println(fs.separationLine());
     }
@@ -26,9 +40,14 @@ public class CLIPrinter implements Printer {
     }
 
     @Override
+    public void printCenter(List<String> lines) {
+        lines.forEach(this::printCenter);
+    }
+
+    @Override
     public void printHelloSection() {
         printLineSeparator();
-        printCenter("Hello");
+        printHeader("Hello!");
         printCenter("This is my study project where I do tasks from a workbook.This is my study project where I do tasks from a workbook.This is my study project where I do tasks from a workbook.");
         printLineSeparator();
     }
@@ -36,7 +55,7 @@ public class CLIPrinter implements Printer {
     @Override
     public void printEndSection() {
         printLineSeparator();
-        printCenter("Application End");
+        printHeader("Application End");
         printLineSeparator();
     }
 

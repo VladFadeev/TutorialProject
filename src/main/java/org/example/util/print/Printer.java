@@ -5,31 +5,53 @@ import java.util.List;
 
 public interface Printer {
 
-    /***
+    /**
      * Prints text
      *
      * @param text message to be printed
      */
     void print(String text);
 
-    /***
+    /**
+     * Prints lines of text
+     *
+     * @param lines text separated to lines to print
+     */
+    void print(List<String> lines);
+
+    /**
+     * Prints header.
+     *
+     * @param header text to print.
+     */
+    void printHeader(String header);
+
+    /**
      * Prints line to separate messages
      */
     void printLineSeparator();
 
-    /***
-     * Prints text aligned with center based on width
+    /**
+     * Prints text aligned to center based on width
      *
      * @param text message to be printed
      */
     void printCenter(String text);
 
-    /***
+
+    /**
+     * Prints lines aligned to center based on width
+     *
+     * @param lines text separated to lines to print
+     */
+    void printCenter(List<String> lines);
+
+    /**
      * Prints introduction section
      */
     void printHelloSection();
 
-    /***
+    /**
      * Prints end section
      */
     void printEndSection();
@@ -47,7 +69,7 @@ public interface Printer {
             LINE_SEPARATOR = lineSeparator;
         }
 
-        /***
+        /**
          * Aligns text to center with respect to width
          *
          * @param text message to align
@@ -70,7 +92,7 @@ public interface Printer {
             return result;
         }
 
-        /***
+        /**
          * Forms lines of text with respect to width
          *
          * @param text message to be formatted
@@ -93,7 +115,7 @@ public interface Printer {
             return lines.toArray(new String[0]);
         }
 
-        /***
+        /**
          * Froms formatted string from lines
          *
          * @param lines lines of text
@@ -108,7 +130,7 @@ public interface Printer {
             return sb.toString();
         }
 
-        /***
+        /**
          * Generates separation line
          *
          * @return string for separation line

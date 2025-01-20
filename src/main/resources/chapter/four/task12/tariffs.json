@@ -1,0 +1,59 @@
+[
+  {
+    "price" : 13,
+    "description": "Regular Tariff",
+    "minutes" : 130,
+    "internetLimitGB" : 13,
+    "customers" : 23
+  },
+  {
+    "price" : 10,
+    "description": "Regular Tariff",
+    "minutes" : 100,
+    "internetLimitGB" : 10,
+    "customers" : 41
+  },
+  {
+    "price" : 15,
+    "description": "Regular Tariff",
+    "minutes" : 150,
+    "internetLimitGB" : 15,
+    "customers" : 6
+  },
+  {
+    "price" : 20,
+    "description": "Regular Tariff",
+    "minutes" : 200,
+    "internetLimitGB" : 20,
+    "customers" : 100
+  },
+  {
+    "price" : 24,
+    "description": "Regular Tariff",
+    "minutes" : 240,
+    "internetLimitGB" : 24,
+    "customers" : 35
+  },
+  {
+    "price" : 7,
+    "description": "Child Tariff",
+    "minutes" : 100,
+    "customers" : 15
+  },
+  {
+    "price" : 10,
+    "description": "Child Tariff",
+    "minutes" : 130,
+    "customers" : 10
+  },
+  {
+    "price" : 40,
+    "description": "Business Tariff",
+    "customers" : 20
+  },
+  {
+    "price" : 45,
+    "description": "Business Tariff",
+    "customers" : 30
+  }
+]

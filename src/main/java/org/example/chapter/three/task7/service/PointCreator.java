@@ -19,19 +19,6 @@ public class PointCreator extends Creator<Point> {
     }
 
     @Override
-    public Point create() throws CreatorException {
-        Point result;
-        try {
-            Reader<Point> pointReader = new ReaderJSON<>(Point.class);
-            result = pointReader.readFromFile(fileName);
-        } catch (ReaderException e) {
-            LOGGER.error(e);
-            throw new CreatorException(e);
-        }
-        return result;
-    }
-
-    @Override
     public List<Point> createList() throws CreatorException {
         List<Point> result;
         try {

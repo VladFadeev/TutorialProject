@@ -1,13 +1,19 @@
 package org.example.chapter.four.task12.entity;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.example.chapter.four.task12.service.TariffException;
+
 public abstract class Tariff {
+    private final static Logger LOGGER = LogManager.getLogger();
     private double price;
     private String description;
     private int minutes;
     private int internetLimitGB;
     private int customers;
 
-    protected Tariff(double price, String description, int minutes, int internetLimitGB , int customers) {
+    protected Tariff(double price, String description,
+                     int minutes, int internetLimitGB, int customers) {
         this.price = price;
         this.description = description;
         this.minutes = minutes;
@@ -15,20 +21,19 @@ public abstract class Tariff {
         this.customers = customers;
     }
 
-    public void call(String phoneNumber) {
-        System.out.println("Call " + phoneNumber + " using " + getClass().getSimpleName());
+    public void call(String phoneNumber) throws TariffException {
+        LOGGER.error("Calling is not supported");
+        throw new TariffException("Calling is not supported");
     }
 
     public void text(String phoneNumber, String message) {
-        System.out.println("SMS " + phoneNumber + " with message " + message + " using " + getClass().getSimpleName());
+        LOGGER.error("Sending SMS is not supported");
+        throw new TariffException("Sending SMS is not supported");
     }
 
-    public void onInternet() {
-        System.out.println("Internet is tuned on using " + getClass().getSimpleName());
-    }
-
-    public void offInternet() {
-        System.out.println("Internet is tuned off using " + getClass().getSimpleName());
+    public void internet() {
+        LOGGER.error("Mobile internet is not supported");
+        throw new TariffException("Mobile internet is not supported");
     }
 
     public double getPrice() {
@@ -73,11 +78,11 @@ public abstract class Tariff {
 
     @Override
     public String toString() {
-        return this.getClass().getSimpleName() + "{" +
+        return "{" +
                 "price=" + price +
-                ", description='" + description + '\'' +
-                ", minutes=" + minutes +
-                ", internetLimitGB=" + internetLimitGB +
+                ", desc='" + description + '\'' +
+                ", mins=" + minutes +
+                ", intLimit=" + internetLimitGB +
                 ", customers=" + customers +
                 '}';
     }

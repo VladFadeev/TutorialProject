@@ -1,20 +1,19 @@
 package org.example.chapter.five.task17.entity;
 
-import org.example.utils.TaskEntity;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Cinema implements TaskEntity {
+//TODO Think about building Cinema and repairs in Cinema
+public class Cinema {
     private final String name;
     private final String address;
     private final List<Screen> screens = new ArrayList<>();
     private final List<TimeSlot> schedule = new ArrayList<>();
     private final static LocalTime FIRST_SLOT = LocalTime.of(7, 0);
 
-    public record Film(String name, int watchTimeMinutes) implements Comparable<Film> {
+    public record Film(int watchTimeMinutes, int sessions, String name) implements Comparable<Film> {
 
         @Override
         public int compareTo(Film o) {

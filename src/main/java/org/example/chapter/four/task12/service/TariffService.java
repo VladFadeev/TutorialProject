@@ -1,44 +1,26 @@
-package org.example.chapter.four.task12.util;
+package org.example.chapter.four.task12.service;
 
 import org.example.chapter.four.task12.entity.Tariff;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
-public class TariffUtil {
-    private final List<Tariff> tariffs;
-
-    public TariffUtil(List<Tariff> tariffs) {
-        this.tariffs = tariffs;
-    }
-
-    public TariffUtil() {
-        tariffs = new ArrayList<>();
-    }
-
-    public List<Tariff> getTariffs() {
-        return List.copyOf(tariffs);
-    }
-
-    public void addTariff(Tariff tariff) {
-        tariffs.add(tariff);
-    }
-
-    public List<Tariff> sortByPrice() {
+public class TariffService {
+    public static List<Tariff> sortByPrice(List<Tariff> tariffs) {
         tariffs.sort(Comparator.comparing(Tariff::getPrice));
         return List.copyOf(tariffs);
     }
 
-    public List<Tariff> sortByCustomers() {
-        tariffs.sort(Comparator.comparing(Tariff::getCustomers));
-        return List.copyOf(tariffs);
+    public static int getCustomersSum(List<Tariff> tariffs) {
+        return tariffs.stream().mapToInt(Tariff::getCustomers).sum();
     }
 
-    public List<Tariff> getTariffByParams(int minCustomers, int maxCustomers, double minPrice, double maxPrice, int minMinutes, int maxMinutes, int minGB, int maxGB) {
-        return tariffs.stream().filter(tariff -> (tariff.getCustomers() >= minCustomers && tariff.getCustomers() <= maxCustomers)
-                && (tariff.getPrice() >= minPrice && tariff.getPrice() <= maxPrice)
-                && (tariff.getMinutes() >= minMinutes && tariff.getMinutes() <= maxMinutes)
-                && (tariff.getInternetLimitGB() >= minGB && tariff.getInternetLimitGB() <=maxGB)).toList();
+    public static Optional<Tariff> getTariffByParams(List<Tariff> tariffs, int[] prices, int[] minutes, int[] internetLimitGB) {
+        return tariffs.stream().filter(tariff ->
+                        (tariff.getPrice() >= prices[0] && tariff.getPrice() <= prices[1])
+                        && (tariff.getMinutes() >= minutes[0] && tariff.getMinutes() <= minutes[1])
+                        && (tariff.getInternetLimitGB() >= internetLimitGB[0] && tariff.getInternetLimitGB() <= internetLimitGB[1]))
+                .findFirst();
     }
 }

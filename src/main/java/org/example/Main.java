@@ -3,7 +3,9 @@ package org.example;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.chapter.five.task17.entity.Cinema;
+import org.example.chapter.five.task17.entity.Film;
 import org.example.chapter.five.task17.service.CinemaCreator;
+import org.example.chapter.five.task17.service.CinemaException;
 import org.example.chapter.four.task12.entity.Tariff;
 import org.example.chapter.four.task12.service.TariffCreator;
 import org.example.chapter.four.task12.service.TariffService;
@@ -33,20 +35,15 @@ public class Main {
         printer.printHelloSection();
         chapter3Task7();
         chapter4Task12();
-        //chapter5Task17();
+        chapter5Task17();
         printer.printEndSection();
         LOGGER.info("Application ended");
     }
 
-    private final static String[] CINEMA_NAMES = {"Kiev", "October", "SilverScreen Galileo",
-            "SilverScreen Dana Mall", "Mir", "Central"};
-    private final static String[] CINEMA_ADDRESSES = {"Kievskiy skver 1", "Independence avenue 55", "Bobruiskaya 3",
-            "Independence avenue 104", "Masherova avenue 5", "Independence avenue 2"};
-
     private static void chapter3Task7() {
         LOGGER.info("Chapter 3 Task 7 Started");
         printer.printLineSeparator();
-        printer.printCenter("Chapter 3, Task 7");
+        printer.printHeader("Chapter 3, Task 7");
         Creator<Point> pointCreator =
                 new PointCreator("src/main/resources/chapter/three/task7/points.json");
         List<Point> points;
@@ -69,7 +66,7 @@ public class Main {
     private static void chapter4Task12() {
         LOGGER.info("Chapter 4 Task 12 Started");
         printer.printLineSeparator();
-        printer.printCenter("Chapter 4, Task 12");
+        printer.printHeader("Chapter 4, Task 12");
         Creator<Tariff> tariffCreator =
                 new TariffCreator("src/main/resources/chapter/four/task12/tariffs.json");
         List<Tariff> tariffs;
@@ -79,8 +76,11 @@ public class Main {
             LOGGER.error(e);
             throw new RuntimeException(e);
         }
+        printer.printHeader("Tariffs before sort");
+        printer.print(tariffs.stream().map(Tariff::toString).toList());
         List<Tariff> sorted = TariffService.sortByPrice(tariffs);
-        printer.print("Tariffs sorted by price: " + sorted);
+        printer.printHeader("Tariffs sorted by price");
+        printer.print(sorted.stream().map(Tariff::toString).toList());
         Optional<Tariff> tariff = TariffService.getTariffByParams(tariffs, new int[] {15, 25}, new int[] {-1, 200},  new int[] {-1, 15});
         printer.print("");
         printer.print("Customers across all tariffs: " + TariffService.getCustomersSum(tariffs));
@@ -92,28 +92,32 @@ public class Main {
     private static void chapter5Task17() {
         LOGGER.info("Chapter 5 Task 17 Started");
         printer.printLineSeparator();
-        printer.printCenter("Chapter 5, Task 17");
-        Cinema cinema1 = new Cinema("Kiev", "Kievskiy skver 1",
-                Arrays.asList("Big", "Small", "VIP"),
-                Arrays.asList("SUPER BIG", "very small", "VIP?"),
-                Arrays.asList(new Cinema.Film( 120, 2, "CJocker"), new Cinema.Film(103, 3, "ATransformers"), new Cinema.Film(57, 1, "BLook Back")));
+        printer.printHeader("Chapter 5, Task 17");
         Creator<Cinema> cinemaCreator =
                 new CinemaCreator("src/main/resources/chapter/five/task17/cinema.json");
         Cinema cinema;
         try {
             cinema = cinemaCreator.create();
-        } catch (CreatorException e) {
+        } catch (CreatorException | CinemaException e ) {
             LOGGER.error(e);
             throw new RuntimeException(e);
         }
-        printer.print("Schedule before sort:\n" + cinema.getFilmSessions());
+        printer.printHeader("Schedule before sort");
+        printer.print(cinema.getSchedule());
         cinema.sortSchedule();
-        printer.print("Schedule after sort:\n" + cinema.getFilmSessions());
+        printer.printHeader("Schedule after sort");
+        printer.print(cinema.getSchedule());
+        printer.printHeader("Screens");
+        printer.print(cinema.getScreens());
+        printer.printHeader("Films");
+        List<Film> films = cinema.getFilms();
+        printer.print(films.stream().map(Film::toString).toList());
+        printer.printHeader("Sessions for the first film");
+        printer.print(cinema.getFilmSessions(films.getFirst()));
         LOGGER.info("Chapter 5 Task 17 Ended");
     }
 
-    /***
-     * Applies application arguments
+    /** Applies application arguments
      *
      * @param arguments arguments to be applied
      * @return Printer with applied arguments

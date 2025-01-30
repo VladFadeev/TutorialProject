@@ -33,6 +33,9 @@
             <AppenderRef ref="${FILE_APPENDER}" level="WARN"/>
             !-->
         </Logger>
+        <Root level="WARN">
+            <AppenderRef ref="CONSOLE" level="WARN"/>
+        </Root>
     </Loggers>
 
 

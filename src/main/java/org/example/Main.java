@@ -9,6 +9,13 @@ import org.example.chapter.five.task17.service.CinemaException;
 import org.example.chapter.four.task12.entity.Tariff;
 import org.example.chapter.four.task12.service.TariffCreator;
 import org.example.chapter.four.task12.service.TariffService;
+import org.example.chapter.six.task10.entity.Building;
+import org.example.chapter.six.task10.entity.Customer;
+import org.example.chapter.six.task10.service.BuildingException;
+import org.example.chapter.six.task10.service.BuildingService;
+import org.example.chapter.six.task10.service.impl.HouseService;
+import org.example.chapter.six.task10.service.impl.OfficeService;
+import org.example.chapter.six.task10.service.impl.ShoppingCenterService;
 import org.example.chapter.three.task7.entity.Point;
 import org.example.chapter.three.task7.service.PointCreator;
 import org.example.chapter.three.task7.service.PointService;
@@ -21,7 +28,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
-
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -36,6 +42,7 @@ public class Main {
         chapter3Task7();
         chapter4Task12();
         chapter5Task17();
+        chapter6Task10();
         printer.printEndSection();
         LOGGER.info("Application ended");
     }
@@ -81,7 +88,7 @@ public class Main {
         List<Tariff> sorted = TariffService.sortByPrice(tariffs);
         printer.printHeader("Tariffs sorted by price");
         printer.print(sorted.stream().map(Tariff::toString).toList());
-        Optional<Tariff> tariff = TariffService.getTariffByParams(tariffs, new int[] {15, 25}, new int[] {-1, 200},  new int[] {-1, 15});
+        Optional<Tariff> tariff = TariffService.getTariffByParams(tariffs, new int[]{15, 25}, new int[]{-1, 200}, new int[]{-1, 15});
         printer.print("");
         printer.print("Customers across all tariffs: " + TariffService.getCustomersSum(tariffs));
         printer.print("");
@@ -98,7 +105,7 @@ public class Main {
         Cinema cinema;
         try {
             cinema = cinemaCreator.create();
-        } catch (CreatorException | CinemaException e ) {
+        } catch (CreatorException | CinemaException e) {
             LOGGER.error(e);
             throw new RuntimeException(e);
         }
@@ -117,7 +124,40 @@ public class Main {
         LOGGER.info("Chapter 5 Task 17 Ended");
     }
 
-    /** Applies application arguments
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    private static void chapter6Task10() {
+        LOGGER.info("Chapter 6 Task 10 Started");
+        printer.printLineSeparator();
+        printer.printHeader("Chapter 6, Task 10");
+        BuildingService[] services = new BuildingService[]{new HouseService(), new OfficeService(), new ShoppingCenterService()};
+        Customer owner = new Customer("Owner", 30);
+        Customer tenant = new Customer("Tenant", 30);
+        for (BuildingService service : services) {
+            try {
+                Building building = service.build(1, new double[]{2});
+                printer.print("Created " + building.getClass().getSimpleName() + ": " + building);
+                service.sell(building, owner);
+                printer.print("New owner: " + owner);
+                service.increaseArea(building, 5);
+                printer.print("Increased area: " + (building.getArea() - 5) + "->" + building.getArea());
+                int roomCount = service.getRoomCount(building);
+                service.doRenovations(building, roomCount);
+                printer.print("Did renovations in room: " + roomCount);
+                double priceM2 = service.getPricePerM2(building);
+                printer.print("Price per square meter: " + priceM2);
+                service.let(building, tenant);
+                service.let(building, tenant, roomCount);
+            } catch (BuildingException e) {
+                LOGGER.error(e);
+                printer.print(e.getMessage());
+            }
+        }
+        LOGGER.info("Chapter 6 Task 10 Ended");
+    }
+
+
+    /**
+     * Applies application arguments
      *
      * @param arguments arguments to be applied
      * @return Printer with applied arguments
@@ -132,7 +172,7 @@ public class Main {
         for (String arg : args) {
             switch (arg) {
                 case "--separator", "-s": {
-                    separator = arguments[args.indexOf(arg) * 2  + 1];
+                    separator = arguments[args.indexOf(arg) * 2 + 1];
                     LOGGER.debug("Separator provided: {}", separator);
                     if (separator.length() != 1) {
                         separator = Printer.FormattingService.DEFAULT_LINE_SEPARATOR;

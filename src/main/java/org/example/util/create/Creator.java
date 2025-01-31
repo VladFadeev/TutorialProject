@@ -8,7 +8,7 @@ import java.util.List;
 
 public abstract class Creator<T> {
     protected final String fileName;
-    private final static Logger LOGGER = LogManager.getLogger();
+    protected final static Logger LOGGER = LogManager.getLogger();
 
     public Creator(String fileName) {
         this.fileName = fileName;

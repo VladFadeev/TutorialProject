@@ -9,6 +9,7 @@ import org.example.chapter.five.task17.service.CinemaException;
 import org.example.chapter.four.task12.entity.Tariff;
 import org.example.chapter.four.task12.service.TariffCreator;
 import org.example.chapter.four.task12.service.TariffService;
+import org.example.chapter.seven.task25.FunctionalService;
 import org.example.chapter.six.task10.entity.Building;
 import org.example.chapter.six.task10.entity.Customer;
 import org.example.chapter.six.task10.service.BuildingException;
@@ -20,6 +21,7 @@ import org.example.chapter.three.task7.entity.Point;
 import org.example.chapter.three.task7.service.PointCreator;
 import org.example.chapter.three.task7.service.PointService;
 import org.example.util.create.Creator;
+import org.example.util.create.impl.StringCreator;
 import org.example.util.exception.CreatorException;
 import org.example.util.print.Printer;
 import org.example.util.print.impl.CLIPrinter;
@@ -43,6 +45,7 @@ public class Main {
         chapter4Task12();
         chapter5Task17();
         chapter6Task10();
+        chapter7Task25();
         printer.printEndSection();
         LOGGER.info("Application ended");
     }
@@ -155,6 +158,24 @@ public class Main {
         LOGGER.info("Chapter 6 Task 10 Ended");
     }
 
+    private static void chapter7Task25() {
+        LOGGER.info("Chapter 7 Task 25 Started");
+        printer.printLineSeparator();
+        printer.printHeader("Chapter 7, Task 25");
+        Creator<String> stringCreator =
+                new StringCreator("src/main/resources/chapter/seven/task25/strings.json");
+        List<String> strings;
+        try {
+            strings = stringCreator.createList();
+        } catch (CreatorException e) {
+            LOGGER.error(e.getMessage());
+            throw new RuntimeException(e);
+        }
+        printer.print("Strings to check: " + strings);
+        strings = strings.stream().filter(FunctionalService::isPangram).toList();
+        printer.print("Strings that are pangrams: " + strings);
+        LOGGER.info("Chapter 7 Task 25 Ended");
+    }
 
     /**
      * Applies application arguments

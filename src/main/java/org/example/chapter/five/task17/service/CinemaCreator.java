@@ -1,7 +1,5 @@
 package org.example.chapter.five.task17.service;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.example.chapter.five.task17.dto.CinemaDTO;
 import org.example.chapter.five.task17.entity.Cinema;
 import org.example.chapter.five.task17.entity.Film;
@@ -15,7 +13,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CinemaCreator extends Creator<Cinema> {
-    private static final Logger LOGGER = LogManager.getLogger();
 
     public CinemaCreator(String fileName) {
         super(fileName);

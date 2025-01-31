@@ -1,7 +1,5 @@
 package org.example.chapter.four.task12.service;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.example.chapter.four.task12.entity.Tariff;
 import org.example.chapter.four.task12.entity.impl.BusinessTariff;
 import org.example.chapter.four.task12.entity.impl.ChildTariff;
@@ -15,7 +13,6 @@ import org.example.util.read.impl.ReaderJSON;
 import java.util.List;
 
 public class TariffCreator extends Creator<Tariff> {
-    private final static Logger LOGGER = LogManager.getLogger();
 
     public TariffCreator(String fileName) {
         super(fileName);

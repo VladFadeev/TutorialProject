@@ -4,9 +4,10 @@
                xsi:schemaLocation="https://logging.apache.org/xml/ns https://logging.apache.org/xml/ns/log4j-config-2.xsd">
 
     <Properties>
-        <Property name="base_path" value="C:\Users\vlad2\Documents\Some Documents\TutorialProject\log"/>
+        <Property name="base_path" value="C:\Users\vlad2\Personal\Learning\Java\TutorialProject\log"/>
         <Property name="FILE_APPENDER" value="FILE"/>
     </Properties>
+
     <Appenders>
         <Console name="CONSOLE" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{dd-MM-yyyy hh:mm:ss:SSS} [%t] %5p - %m%n"/>
@@ -27,16 +28,16 @@
             <AppenderRef ref="${FILE_APPENDER}" level="DEBUG"/>
         </Logger>
 
-        <Logger name="org.example.chapter.three.task7.service.PointService" level="DEBUG" additivity = "false">
-            <AppenderRef ref="CONSOLE" level="DEBUG"/>
-            <!--
-            <AppenderRef ref="${FILE_APPENDER}" level="WARN"/>
-            !-->
-        </Logger>
-        <Root level="WARN">
-            <AppenderRef ref="CONSOLE" level="WARN"/>
-        </Root>
+<!--        <Logger name="org.example.chapter.three.task7.service.PointService" level="DEBUG" additivity = "false">-->
+<!--            <AppenderRef ref="CONSOLE" level="DEBUG"/>-->
+<!--            &lt;!&ndash;-->
+<!--            <AppenderRef ref="${FILE_APPENDER}" level="WARN"/>-->
+<!--            !&ndash;&gt;-->
+<!--        </Logger>-->
+<!--        <Root level="INFO">-->
+<!--&lt;!&ndash;            <AppenderRef ref="CONSOLE" level="WARN"/>&ndash;&gt;-->
+<!--            <AppenderRef ref="${FILE_APPENDER}" level="DEBUG"/>-->
+<!--        </Root>-->
     </Loggers>
-
 
 </Configuration>

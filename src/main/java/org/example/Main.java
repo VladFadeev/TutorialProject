@@ -20,19 +20,18 @@ import org.example.chapter.six.task10.service.impl.ShoppingCenterService;
 import org.example.chapter.three.task7.entity.Point;
 import org.example.chapter.three.task7.service.PointCreator;
 import org.example.chapter.three.task7.service.PointService;
+import org.example.standalone.ChapterOneTask;
 import org.example.util.create.Creator;
 import org.example.util.create.impl.StringCreator;
 import org.example.util.exception.CreatorException;
 import org.example.util.print.Printer;
 import org.example.util.print.impl.CLIPrinter;
+import org.example.util.read.Reader;
+import org.example.util.read.impl.CLIReader;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.regex.Pattern;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     private static Printer printer;
     private static final Logger LOGGER = LogManager.getLogger();
@@ -41,11 +40,13 @@ public class Main {
         LOGGER.info("Application started");
         printer = applyApplicationParams(args);
         printer.printHelloSection();
-        chapter3Task7();
-        chapter4Task12();
-        chapter5Task17();
-        chapter6Task10();
-        chapter7Task25();
+        Chapter ch1 = new ChapterOneTask(new CLIReader<>(Integer.class));
+        ch1.task();
+//        chapter3Task7();
+//        chapter4Task12();
+//        chapter5Task17();
+//        chapter6Task10();
+//        chapter7Task25();
         printer.printEndSection();
         LOGGER.info("Application ended");
     }

@@ -44,4 +44,19 @@ public class ReaderJSON<T> extends Reader<T> {
         }
         return result;
     }
+
+    @Override
+    public int readArray(int[] arr) throws ReaderException {
+        throw new ReaderException("Not implemented yet");
+    }
+
+    @Override
+    public int readInt() throws ReaderException {
+        throw new ReaderException("Not implemented yet");
+    }
+
+    @Override
+    public void close() throws ReaderException {
+        throw new ReaderException("Not implemented yet");
+    }
 }

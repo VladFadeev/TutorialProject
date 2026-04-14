@@ -28,4 +28,10 @@ public abstract class Reader<T> {
      * @throws ReaderException if necessary
      */
     public abstract List<T> readListFromFile(String fileName) throws ReaderException;
+
+    public abstract int readArray(int[] arr) throws ReaderException;
+
+    public abstract int readInt() throws ReaderException;
+
+    public abstract void close() throws ReaderException;
 }

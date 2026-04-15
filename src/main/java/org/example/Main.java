@@ -20,6 +20,7 @@ import org.example.chapter.six.task10.service.impl.ShoppingCenterService;
 import org.example.chapter.three.task7.entity.Point;
 import org.example.chapter.three.task7.service.PointCreator;
 import org.example.chapter.three.task7.service.PointService;
+import org.example.standalone.ChapterOneTask;
 import org.example.util.create.Creator;
 import org.example.util.create.impl.StringCreator;
 import org.example.util.exception.CreatorException;
@@ -37,7 +38,8 @@ public class Main {
         LOGGER.info("Application started");
         printer = applyApplicationParams(args);
         printer.printHelloSection();
-//        ch1.task();
+        Chapter ch1 = ChapterOneTask.getInstance();
+        ch1.task();
 //        chapter3Task7();
 //        chapter4Task12();
 //        chapter5Task17();

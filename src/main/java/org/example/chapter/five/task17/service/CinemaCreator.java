@@ -21,8 +21,7 @@ public class CinemaCreator extends Creator<Cinema> {
     public Cinema create() throws CreatorException, CinemaException {
         CinemaDTO dto;
         try {
-            Reader<CinemaDTO> dtoReader = new ReaderJSON<>();
-            dto = dtoReader.read(fileName, CinemaDTO.class);
+            dto = ReaderJSON.read(fileName, CinemaDTO.class);
             LOGGER.debug("Received Cinema DTO: {}", dto);
         } catch (ReaderException e) {
             LOGGER.error(e);

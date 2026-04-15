@@ -18,8 +18,7 @@ public class PointCreator extends Creator<Point> {
     public List<Point> createList() throws CreatorException {
         List<Point> result;
         try {
-            Reader<Point> pointReader = new ReaderJSON<>();
-            result = pointReader.readList(fileName, Point.class);
+            result = ReaderJSON.readList(fileName, Point.class);
         } catch (ReaderException e) {
             LOGGER.error(e);
             throw new CreatorException(e);

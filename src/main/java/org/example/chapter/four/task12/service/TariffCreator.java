@@ -25,8 +25,8 @@ public class TariffCreator extends Creator<Tariff> {
             td.registerTariff(5, RegularTariff.class);
             td.registerTariff(3, BusinessTariff.class);
             td.registerTariff(4, ChildTariff.class);
-            Reader<Tariff> tariffReader = new ReaderJSON<>(Tariff.class, td);
-            tariffs = tariffReader.readList(fileName, Tariff.class);
+            ReaderJSON.addDeserializer(Tariff.class, td);
+            tariffs = ReaderJSON.readList(fileName, Tariff.class);
         } catch (ReaderException e) {
             LOGGER.error(e);
             throw new CreatorException(e);

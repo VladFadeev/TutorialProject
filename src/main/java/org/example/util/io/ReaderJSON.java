@@ -41,10 +41,10 @@ public class ReaderJSON {
             result = MAPPER.readValue(new File(fileName), clazz);
             LOGGER.debug("Read value: {}", result);
         } catch (DatabindException e) {
-            LOGGER.error("JSON structure mismatch when reading single value at {}",  fileName);
+            LOGGER.error("JSON structure mismatch when reading single value at {}", fileName);
             throw new ReaderException("JSON structure mismatch when reading single value at " + fileName, e);
         } catch (StreamReadException e) {
-            LOGGER.error("JSON content parsing error when reading single value at {}",  fileName);
+            LOGGER.error("JSON content parsing error when reading single value at {}", fileName);
             throw new ReaderException("JSON content parsing error when reading single value at " + fileName, e);
         } catch (IOException e) {
             LOGGER.error("Couldn't read single value from: {}", fileName);
@@ -69,10 +69,10 @@ public class ReaderJSON {
                     MAPPER.getTypeFactory().constructCollectionType(List.class, clazz));
             LOGGER.debug("Read list of values: {}", result);
         } catch (DatabindException e) {
-            LOGGER.error("JSON structure mismatch when reading list of values at {}",  fileName);
+            LOGGER.error("JSON structure mismatch when reading list of values at {}", fileName);
             throw new ReaderException("JSON structure mismatch when reading list of values at " + fileName, e);
         } catch (StreamReadException e) {
-            LOGGER.error("JSON content parsing error when reading list of values at {}",  fileName);
+            LOGGER.error("JSON content parsing error when reading list of values at {}", fileName);
             throw new ReaderException("JSON content parsing error when reading list of values at " + fileName, e);
         } catch (IOException e) {
             LOGGER.error("Couldn't read list from: {}", fileName);

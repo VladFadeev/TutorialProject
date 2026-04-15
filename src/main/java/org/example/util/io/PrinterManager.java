@@ -1,6 +1,6 @@
-package org.example.util.print;
+package org.example.util.io;
 
-import org.example.util.print.impl.CLIPrinter;
+import org.example.util.io.impl.CLIPrinter;
 
 public class PrinterManager {
     private static volatile Printer PRINTER;

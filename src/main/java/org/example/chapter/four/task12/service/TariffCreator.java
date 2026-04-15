@@ -7,8 +7,7 @@ import org.example.chapter.four.task12.entity.impl.RegularTariff;
 import org.example.util.create.Creator;
 import org.example.util.exception.CreatorException;
 import org.example.util.exception.ReaderException;
-import org.example.util.read.Reader;
-import org.example.util.read.impl.ReaderJSON;
+import org.example.util.io.ReaderJSON;
 
 import java.util.List;
 
@@ -27,7 +26,7 @@ public class TariffCreator extends Creator<Tariff> {
             td.registerTariff(3, BusinessTariff.class);
             td.registerTariff(4, ChildTariff.class);
             Reader<Tariff> tariffReader = new ReaderJSON<>(Tariff.class, td);
-            tariffs = tariffReader.readListFromFile(fileName);
+            tariffs = tariffReader.readList(fileName, Tariff.class);
         } catch (ReaderException e) {
             LOGGER.error(e);
             throw new CreatorException(e);

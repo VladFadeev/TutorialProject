@@ -1,6 +1,6 @@
-package org.example.util.print.impl;
+package org.example.util.io.impl;
 
-import org.example.util.print.Printer;
+import org.example.util.io.Printer;
 
 import java.util.List;
 

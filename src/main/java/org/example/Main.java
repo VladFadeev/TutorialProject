@@ -20,14 +20,11 @@ import org.example.chapter.six.task10.service.impl.ShoppingCenterService;
 import org.example.chapter.three.task7.entity.Point;
 import org.example.chapter.three.task7.service.PointCreator;
 import org.example.chapter.three.task7.service.PointService;
-import org.example.standalone.ChapterOneTask;
 import org.example.util.create.Creator;
 import org.example.util.create.impl.StringCreator;
 import org.example.util.exception.CreatorException;
-import org.example.util.print.Printer;
-import org.example.util.print.impl.CLIPrinter;
-import org.example.util.read.Reader;
-import org.example.util.read.impl.CLIReader;
+import org.example.util.io.Printer;
+import org.example.util.io.impl.CLIPrinter;
 
 import java.util.*;
 import java.util.regex.Pattern;
@@ -40,8 +37,7 @@ public class Main {
         LOGGER.info("Application started");
         printer = applyApplicationParams(args);
         printer.printHelloSection();
-        Chapter ch1 = new ChapterOneTask(new CLIReader<>(Integer.class));
-        ch1.task();
+//        ch1.task();
 //        chapter3Task7();
 //        chapter4Task12();
 //        chapter5Task17();
@@ -184,6 +180,7 @@ public class Main {
      * @param arguments arguments to be applied
      * @return Printer with applied arguments
      */
+    //TODO DO configuration in property file
     private static Printer applyApplicationParams(String... arguments) {
         LOGGER.info("Applying application arguments");
         List<String> args = Arrays.stream(arguments).filter(Pattern.compile("-+").asPredicate()).toList();

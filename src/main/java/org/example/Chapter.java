@@ -1,8 +1,7 @@
 package org.example;
 
-import org.example.util.print.Printer;
-import org.example.util.print.PrinterManager;
-import org.example.util.read.Reader;
+import org.example.util.io.Printer;
+import org.example.util.io.PrinterManager;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

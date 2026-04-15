@@ -6,8 +6,7 @@ import org.example.chapter.five.task17.entity.Film;
 import org.example.util.create.Creator;
 import org.example.util.exception.CreatorException;
 import org.example.util.exception.ReaderException;
-import org.example.util.read.Reader;
-import org.example.util.read.impl.ReaderJSON;
+import org.example.util.io.ReaderJSON;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,8 +21,8 @@ public class CinemaCreator extends Creator<Cinema> {
     public Cinema create() throws CreatorException, CinemaException {
         CinemaDTO dto;
         try {
-            Reader<CinemaDTO> dtoReader = new ReaderJSON<>(CinemaDTO.class);
-            dto = dtoReader.readFromFile(fileName);
+            Reader<CinemaDTO> dtoReader = new ReaderJSON<>();
+            dto = dtoReader.read(fileName, CinemaDTO.class);
             LOGGER.debug("Received Cinema DTO: {}", dto);
         } catch (ReaderException e) {
             LOGGER.error(e);

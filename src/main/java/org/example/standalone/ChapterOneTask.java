@@ -2,7 +2,6 @@ package org.example.standalone;
 
 import org.example.Chapter;
 import org.example.util.exception.ReaderException;
-import org.example.util.read.Reader;
 
 import java.util.Arrays;
 
@@ -24,14 +23,14 @@ public class ChapterOneTask extends Chapter {
         try {
             System.out.println("How many integers would you like to enter?");
             PRINTER.print("How many integers would you like to enter?");
-            int n = READER.readInt();
+            int n = READER.read();
             LOGGER.debug("{} integers should be entered.", n);
             PRINTER.print(Integer.toString(n));
 
             int[] arr = new int[n];
             System.out.println("Enter " + n + " integers:");
             PRINTER.print("Enter " + n + " integers:");
-            READER.readArray(arr);
+            READER.read(arr);
             READER.close();
             LOGGER.debug("{} were entered.", Arrays.toString(arr));
             PRINTER.print(Arrays.toString(arr));
